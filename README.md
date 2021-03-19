@@ -32,7 +32,7 @@
 belongs_to :user
 has_one :purchase
 
-## Purchase テーブル
+## Purchases テーブル
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
 | user       | references | null: false, foreign_key: true |
@@ -43,7 +43,7 @@ belongs_to :user
 belongs_to :item
 has_one :shipping
 
-## Shipping テーブル
+## Shippings テーブル
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | postal_code      | string     | null: false                    |
