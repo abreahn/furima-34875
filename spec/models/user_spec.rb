@@ -49,23 +49,23 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
-      it 'passwordは語のみでは登録できない' do
+      it 'passwordは英語のみでは登録できない' do
         @user.password = 'aaaaaa'
         @user.password_confirmation = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて半角で設定してください")
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて半角で設定してください')
       end
       it 'passwordは数字のみでは登録できない' do
         @user.password = '111111'
         @user.password_confirmation = '111111'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて半角で設定してください")
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて半角で設定してください')
       end
       it 'passwordは全角では登録できない' do
         @user.password = 'ＡＡＡＡＡＡ'
         @user.password_confirmation = 'ＡＡＡＡＡＡ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて半角で設定してください")
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて半角で設定してください')
       end
       it 'passwordが5文字以下では登録できない' do
         @user.password = 'aaa00'
