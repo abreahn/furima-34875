@@ -1,4 +1,4 @@
-class DeliveryArea < ActiveHash: :Base
+class DeliveryArea < ActiveHash::Base
   self.data = [
     { id: 1, name: '--' },
     { id: 2, name: '北海道'},
@@ -10,7 +10,7 @@ class DeliveryArea < ActiveHash: :Base
     { id: 8, name: '福島県'},
     { id: 9, name: '茨城県'},
     { id: 10, name: '栃木県'},
-    { id: 11, name: '群馬県'}
+    { id: 11, name: '群馬県'},
     { id: 12, name: '埼玉県' },
     { id: 13, name: '千葉県' },
     { id: 14, name: '東京都' },
