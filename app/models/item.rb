@@ -13,12 +13,16 @@ class Item < ApplicationRecord
     validates :name
     validates :description
     validates :price
+    validates :image
   end
   with_options numericality: { other_than: 1 } do
-    validates :category
-    validates :condition
-    validates :delivery_area
-    validates :delivery_charge
-    validates :delivery_day
+    validates :category_id
+    validates :condition_id
+    validates :delivery_area_id
+    validates :delivery_charge_id
+    validates :delivery_day_id
   end
+
+  validates :price, numericality:{ greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'は300〜9999999の範囲の半角数字で設定してください' }
+  
 end
