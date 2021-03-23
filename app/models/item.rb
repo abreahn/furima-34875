@@ -24,6 +24,7 @@ class Item < ApplicationRecord
     validates :delivery_day_id
   end
 
-  validates :price, numericality:{ greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'は300〜9999999の範囲の半角数字で設定してください' }
-  
+  validates :price,
+            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+                            message: 'は300〜9999999の範囲の半角数字で設定してください' }
 end
