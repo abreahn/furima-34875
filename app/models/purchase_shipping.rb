@@ -9,7 +9,7 @@ class PurchaseShipping
     validates :delivery_area_id, numericality: {other_than: 1, message: "select"}
     validates :city
     validates :addresses
-    validates :phone_number, format: {with: /\A\d{1,11}\z/, message: "input only number"}
+    validates :phone_number, format: {with: /\A\d{1,11}\z/, message: "input only number within 11 digits"}
   end
     
   def save
