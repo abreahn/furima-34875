@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
-  before_action :move_to_index, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     @purchase_shipping = PurchaseShipping.new
@@ -27,18 +27,16 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item
-    item = Item.find(purchase_params[:item_id])
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: item.price,
+      amount: @item.price,
       card: purchase_params[:token],
       currency: 'jpy'
     )
   end
 
   def move_to_index
-    item = Item.find(params[:item_id])
-    redirect_to root_path if current_user.id == item.user_id || item.purchase.present?
+    redirect_to root_path if current_user.id == @item.user_id || @item.purchase.present?
   end
 
   def set_item
