@@ -12,6 +12,11 @@ RSpec.describe PurchaseShipping, type: :model do
       it 'すべての値が正しく入力されていれば購入できること' do
         expect(@purchase_shipping).to be_valid
       end
+
+      it '建物名が空の場合でも購入できること' do
+        @purchase_shipping.building = ''
+        expect(@purchase_shipping).to be_valid
+      end
     end
 
     context '商品購入できないとき' do
@@ -34,7 +39,7 @@ RSpec.describe PurchaseShipping, type: :model do
       end
 
       it '都道府県のidが1の場合購入できないこと' do
-        @purchase_shipping.delivery_area_id = '1'
+        @purchase_shipping.delivery_area_id = 1
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include('Delivery area select')
       end
@@ -73,6 +78,18 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.token = ''
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it 'ユーザーidが空の場合購入できないこと' do
+        @purchase_shipping.user_id = ''
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("User can't be blank")
+      end
+
+      it '商品idが空の場合購入できないこと' do
+        @purchase_shipping.item_id = ''
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

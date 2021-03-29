@@ -1,9 +1,9 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
+  before_action :set_item, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @purchase_shipping = PurchaseShipping.new
   end
 
@@ -14,7 +14,6 @@ class PurchasesController < ApplicationController
       @purchase_shipping.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -39,6 +38,10 @@ class PurchasesController < ApplicationController
 
   def move_to_index
     item = Item.find(params[:item_id])
-    redirect_to root_path if current_user.id == item.user_id || Purchase.where(item_id: params[:item_id]).present? == true
+    redirect_to root_path if current_user.id == item.user_id || item.purchase.present?
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end
