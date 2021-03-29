@@ -123,10 +123,10 @@
           <div class='item-img-content'>
             <%= image_tag item.image, class: "item-img" %>
 
-            <% if false %>
-            <div class='sold-out'>
-              <span>Sold Out!!</span>
-            </div>
+            <% if Purchase.where(item_id: item.id).present? %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
             <% end %>
 
           </div>

@@ -50,6 +50,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path unless current_user.id == @item.user.id
+    if current_user.id != @item.user.id || Purchase.where(item_id: params[:id]).present? == true
+      redirect_to root_path 
+    end
   end
 end
