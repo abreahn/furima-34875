@@ -24,19 +24,19 @@ RSpec.describe PurchaseShipping, type: :model do
       it '郵便番号にハイフンがない場合購入できないこと' do
         @purchase_shipping.postal_code = '1111111'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@purchase_shipping.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
 
       it '都道府県が選択されていない場合購入できないこと' do
         @purchase_shipping.delivery_area_id = ''
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Delivery area select")
+        expect(@purchase_shipping.errors.full_messages).to include('Delivery area select')
       end
 
       it '都道府県のidが1の場合購入できないこと' do
         @purchase_shipping.delivery_area_id = '1'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Delivery area select")
+        expect(@purchase_shipping.errors.full_messages).to include('Delivery area select')
       end
 
       it '市区町村が空の場合購入できないこと' do
@@ -60,13 +60,13 @@ RSpec.describe PurchaseShipping, type: :model do
       it '電話番号が12桁以上の場合購入できないこと' do
         @purchase_shipping.phone_number = '123456789012'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number input only number within 11 digits")
+        expect(@purchase_shipping.errors.full_messages).to include('Phone number input only number within 11 digits')
       end
 
       it '電話番号が全角数字の場合購入できないこと' do
         @purchase_shipping.phone_number = '１２３４５６７８９０１'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Phone number input only number within 11 digits")
+        expect(@purchase_shipping.errors.full_messages).to include('Phone number input only number within 11 digits')
       end
 
       it 'トークンが空の場合購入できないこと' do
