@@ -1,7 +1,7 @@
 class PurchaseShipping
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :delivery_area_id, :city, :addresses, :building, :phone_number, :purchase_id,
-                :image, :number, :exp_month, :exp_year, :cvc, :token
+  attr_accessor :user_id, :item_id, :postal_code, :delivery_area_id, :city, :addresses, :building, :phone_number,
+                :image, :token
 
   with_options presence: true do
     validates :user_id
