@@ -68,6 +68,12 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Phone number input only number within 11 digits")
       end
+
+      it 'トークンが空の場合購入できないこと' do
+        @purchase_shipping.token = ''
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
