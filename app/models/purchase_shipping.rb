@@ -1,6 +1,6 @@
 class PurchaseShipping
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :delivery_area_id, :city, :addresses, :building, :phone_number, :purchase_id, :image, :number, :exp_month, :exp_year, :cvc
+  attr_accessor :user_id, :item_id, :postal_code, :delivery_area_id, :city, :addresses, :building, :phone_number, :purchase_id, :image, :number, :exp_month, :exp_year, :cvc, :token
 
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class PurchaseShipping
     validates :city
     validates :addresses
     validates :phone_number, format: {with: /\A\d{1,11}\z/, message: "input only number within 11 digits"}
+    validates :token
   end
     
   def save
