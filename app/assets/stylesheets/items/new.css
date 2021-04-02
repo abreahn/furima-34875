@@ -227,3 +227,9 @@
 .inc {
   font-size: 13px;
 }
+
+.child{
+  border-bottom:#666 1px solid;
+  margin: 10px 0;
+  padding-left: 11px;
+}
