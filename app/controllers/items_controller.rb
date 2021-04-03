@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :query_item, only: [:index, :query]
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -45,6 +46,10 @@ class ItemsController < ApplicationController
     render json:{ keyword: tag }
   end
 
+  def query
+    @results = @p.result.order('created_at DESC')
+  end
+
   private
 
   def item_tag_params
@@ -64,4 +69,10 @@ class ItemsController < ApplicationController
   def move_to_index
     redirect_to root_path if current_user.id != @item.user.id || @item.purchase.present?
   end
+
+  def query_item
+    @p = Item.ransack(params[:q])
+  end
+
+  
 end
