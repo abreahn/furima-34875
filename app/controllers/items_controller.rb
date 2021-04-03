@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     @item = ItemTag.new(item_tag_params)
     if @item.valid?
       @item.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render :new
     end
@@ -41,9 +41,10 @@ class ItemsController < ApplicationController
   end
 
   def search
-    return nil if params[:keyword] == ""
-    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"] )
-    render json:{ keyword: tag }
+    return nil if params[:keyword] == ''
+
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"])
+    render json: { keyword: tag }
   end
 
   def query
@@ -54,7 +55,7 @@ class ItemsController < ApplicationController
 
   def item_tag_params
     params.require(:item_tag).permit(:tag_name, :name, :description, :category_id, :condition_id, :delivery_charge_id, :delivery_area_id,
-                                 :delivery_day_id, :price, :image).merge(user_id: current_user.id, item_id: params[:id])
+                                     :delivery_day_id, :price, :image).merge(user_id: current_user.id, item_id: params[:id])
   end
 
   def item_params
@@ -73,6 +74,4 @@ class ItemsController < ApplicationController
   def query_item
     @p = Item.ransack(params[:q])
   end
-
-  
 end
