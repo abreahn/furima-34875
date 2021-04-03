@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :purchases, only: [:index, :create]
     collection do
       get 'search'
+      get 'query'
     end
   end
 end
