@@ -114,6 +114,30 @@
 
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
+
+    <%= search_form_for @p, url: query_items_path do |f| %>
+      <%= f.label :category_id_eq, 'カテゴリー　' %>
+      <%= f.collection_select :category_id_eq, Category.all, :id, :name,  include_blank: '指定なし' %>
+      <br>
+      <%= f.label :condition_id_eq, '商品状態　　' %>
+      <%= f.collection_select :condition_id_eq, Condition.all, :id, :name,  include_blank: '指定なし' %>
+      <br>
+      <%= f.label :delivery_charge_id_eq, '配送料負担　' %>
+      <%= f.collection_select :delivery_charge_id_eq, DeliveryCharge.all, :id, :name,  include_blank: '指定なし' %>
+      <br>
+      <%= f.label :price, '価格：' %>
+      <%= f.radio_button :price_lteq, '' %>
+      指定なし
+      <%= f.radio_button :price_lteq, '1000' %>
+      1000円以下
+      <%= f.radio_button :price_lteq, '2500' %>
+      2500円以下
+      <%= f.radio_button :price_lteq, '5000' %>
+      5000円以下
+      <br>
+      <%= f.submit '検索' %>
+    <% end %>
+
     <%= link_to '新規投稿商品', new_item_path, class: "subtitle" %>
     <ul class='item-lists'>
 
